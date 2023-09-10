@@ -71,7 +71,7 @@ def generate_answer(question, df, file_path):
             yield output[-1][-1]
             yield "[SEP]"
 
-
+# 以下是多线程取回LLM流式结果的尝试，但是只能取回第一段
 
 # def a(question, q):
 #     for step in zero_shot_agent.iter(question):
@@ -100,41 +100,3 @@ def generate_answer(question, df, file_path):
 #         yield q.get()
 
 
-# def a(question, q, event):
-#     for step in zero_shot_agent.iter(question):
-#         q.put(str(step))
-#         event.set()  # 设置事件通知b函数开始工作
-#         event.wait() # 等待b函数完成工作
-#
-# def b(q, event):
-#     while True:
-#         event.wait()  # 等待a函数产生输出
-#         for re in sth.generate_tokens():
-#             q.put(re)
-#         event.clear()  # 清除事件通知a函数可以继续工作
-#
-# def run_and_concatenate(question):
-#     q = queue.Queue()
-#     event = threading.Event()
-#
-#     t1 = threading.Thread(target=a, args=(question, q, event))
-#     t2 = threading.Thread(target=b, args=(q, event))
-#     t1.start()
-#     t2.start()
-#
-#     t1.join()
-#     t2.join()
-#
-#     while not q.empty():
-#         yield q.get()
-
-
-# # qa(question)
-# # result_llm = ""
-# # for chunk in qa(question):
-# #     print(chunk)
-# #     result_llm = result_llm + str(chunk)
-# # #     print(result_llm)
-# # #
-# with open("result.txt","w") as r:
-#     r.write(t)
