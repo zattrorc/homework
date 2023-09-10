@@ -12,6 +12,9 @@ init_state_dict = {
     "file_path":None
 }
 
+if not os.path.exists('./cache'):
+    os.makedirs('./cache')
+
 def add_text(state_dict, history, text):
     #接收提问
     history = history + [(text, None)]
@@ -56,7 +59,6 @@ def file_check(state_dict, history):
 def images_to_base64_md():
     #将图片转为Markdown
 
-    
     path = './cache'
     markdown_list = []
     files = [f for f in os.listdir(path) if f.lower().endswith('.jpg')]
