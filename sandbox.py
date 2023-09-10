@@ -14,7 +14,7 @@ import seaborn as sns
 plt.rcParams['font.sans-serif'] = ['SimHei']
 
 #白名单库，如需其它包直接修改以下列表
-_SAFE_MODULES = ["math","seaborn", "os", "pandas","numpy", "sklearn",
+_SAFE_MODULES = ["math","seaborn", "os", "pandas","numpy", "sklearn","scipy.stats","statsmodels.api",
                  "sklearn.linear_model","scipy", "matplotlib","matplotlib.pyplot"]
 
 

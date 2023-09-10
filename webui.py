@@ -5,6 +5,9 @@ import time
 from backend import generate_answer
 import base64
 
+if not os.path.exists('./cache'):
+    os.makedirs('./cache')
+
 init_state_dict = {
     "question":"",
     "file_uploaded":False,
