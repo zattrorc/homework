@@ -10,3 +10,4 @@ seaborn
 gradio
 tabulate
 statsmodels
+google-search-results

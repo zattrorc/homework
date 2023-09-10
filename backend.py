@@ -3,7 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain.agents import Tool
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
-from langchain.agents import initialize_agent
+from langchain.agents import initialize_agent, AgentType
 from util import output_praser, get_info, StreamHandler
 os.environ["OPENAI_API_BASE"] = 'https://api.ai-yyds.com/v1'
 os.environ["OPENAI_API_KEY"] = "sk-ALsXrDvVsHcx8xVQ15412f23EeF44f16Ae4a2fA5Fe88CeD4"
@@ -18,7 +18,7 @@ llm = ChatOpenAI(temperature=0,
 EXCEL_QA_CODING_TEM = """
         You are working with a pandas dataframe in Python. The name of the dataframe is `df`.
         Here is some information about this dataframe:{info} 
-        Please solve this question by writing a python script that can solve this question.
+        Please tell us you idea and  solve this mission by writing a python script that analysis df.
         Code block in answer should be like following sample:
         
         ```python
@@ -26,7 +26,7 @@ EXCEL_QA_CODING_TEM = """
         print(sorted_df[1])
         ```      
         
-        This is the question to be answer:{query}. 
+        This is the mission to be solve:{query}. 
         """
 
 
@@ -57,14 +57,14 @@ def generate_answer(question, df, file_path):
                 func=code_interpreter.get_response_with_coding,
                 description="write a python code according to query, input should be the question itself",
             )]
-    zero_shot_agent = initialize_agent(
-        agent = "zero-shot-react-description",
+    openai_agent = initialize_agent(
+        agent = AgentType.OPENAI_FUNCTIONS,
         tools = tools,
         llm = llm,
         max_iterations =5,
         return_intermediate_steps=True)
 
-    for step in zero_shot_agent.iter(question):
+    for step in openai_agent.iter(question):
         for re in sth.generate_tokens():
             yield re
         if (output := step.get("intermediate_step")):
