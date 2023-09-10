@@ -1,0 +1,11 @@
+langchain
+pandas
+numpy
+openai
+RestrictedPython
+matplotlib
+scipy
+scikit-learn
+seaborn
+gradio
+tabulate
