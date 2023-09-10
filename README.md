@@ -6,4 +6,4 @@
    python3 webui.py
    ```
 <br />
-具体使用流程参照screenshot里面的视频，上传新闻及会自动替代旧的
+具体使用流程参照screenshot里面的视频，上传新excel表格会自动替代旧的，目前只支持csv格式
