@@ -15,8 +15,6 @@ init_state_dict = {
     "file_path":None
 }
 
-if not os.path.exists('./cache'):
-    os.makedirs('./cache')
 
 def add_text(state_dict, history, text):
     #接收提问
