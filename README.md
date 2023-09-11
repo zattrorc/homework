@@ -2,6 +2,7 @@
 基于RestrictedPython实现沙箱，目前只支持在沙盒里运行math,seaborn, os, pandas, numpy, sklearn, scipy。<br />
 如果需要支持额外的包可以修改sanbox.py中的白名单列表<br />
 运行方法<br />
+先在backend.py填入你的openai key，然后启动前端<br />
 ```bash
    python3 webui.py
    ```
