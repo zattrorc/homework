@@ -41,8 +41,6 @@ def replace_plt_show_with_savefig(code_str):
         replacement = f'plt.savefig("{random_path}")'
         code_str = code_str[:start] + replacement + code_str[end:]
         offset += len(replacement) - len(match.group())
-
-
     return code_str, save_paths
 
 
