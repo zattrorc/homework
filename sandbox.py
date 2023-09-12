@@ -72,7 +72,6 @@ def execute_in_sandbox(df, code):
         'df': df
     }
     code, save_paths = replace_plt_show_with_savefig(code)
-    code = code
     byte_code = compile_restricted(
         code + "\nprint(' ')",
         filename='<user code>',
