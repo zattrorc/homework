@@ -1,4 +1,4 @@
-  from RestrictedPython import compile_restricted,  safe_builtins
+from RestrictedPython import compile_restricted,  safe_builtins
 from RestrictedPython.PrintCollector import PrintCollector
 import matplotlib.pyplot as plt
 import pandas as pd
