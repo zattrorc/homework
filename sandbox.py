@@ -1,4 +1,4 @@
-from RestrictedPython import compile_restricted, safe_globals, safe_builtins
+  from RestrictedPython import compile_restricted,  safe_builtins
 from RestrictedPython.PrintCollector import PrintCollector
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -13,32 +13,18 @@ import seaborn as sns
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 
-#白名单库，如需其它包直接修改以下列表
-_SAFE_MODULES = ["math","seaborn", "os", "pandas","numpy", "sklearn","scipy.stats","statsmodels.api",
-                 "sklearn.linear_model","scipy", "matplotlib","matplotlib.pyplot"]
+#白名单库，如需其它包直接修改以下列表并修改_safe_import
+# _SAFE_MODULES = ["math","seaborn", "os", "pandas","numpy", "sklearn","scipy.stats","statsmodels.api",
+#                  "sklearn.linear_model","scipy", "matplotlib","matplotlib.pyplot"]
 
 
 def _safe_import(name, *args, **kwargs):
-    if name not in _SAFE_MODULES:
-        raise Exception(f"Importing of module {name!r} is not allowed")
+    # if name not in _SAFE_MODULES:
+    #     raise Exception(f"Importing of module {name!r} is not allowed")
     return __import__(name, *args, **kwargs)
 
-secure_globals = safe_globals.copy()
-
-modules = {
-    'pandas': pd,
-    'pd':pd,
-    'np':numpy,
-    'matplotlib': matplotlib,
-    'math': math,
-    'numpy': numpy,
-    'scipy': scipy,
-    'sklearn': sklearn,
-    'plt': plt,
-    'sns':sns
-}
-secure_globals.update(modules)
-
+def _hook_write(obj):
+    return obj
 
 def generate_random_path():
     number = ''.join([str(random.randint(0, 9)) for _ in range(6)])
@@ -67,8 +53,22 @@ def execute_in_sandbox(df, code):
             "__import__": _safe_import,
             "_print_": PrintCollector,
             "_getitem_": lambda x, y: x[y],
+            "_write_": _hook_write
         },
     }
+    modules = {
+            'pandas': pd,
+            'pd':pd,
+            'np':numpy,
+            'matplotlib': matplotlib,
+            'math': math,
+            'numpy': numpy,
+            'scipy': scipy,
+            'sklearn': sklearn,
+            'plt': plt,
+            'sns':sns
+        }
+    my_globals.update(modules)
 
     local_vars = {
         'df': df
