@@ -5,7 +5,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
 from langchain.agents import initialize_agent, AgentType
 from util import output_praser, get_info, StreamHandler
-# os.environ["OPENAI_API_BASE"] = 'https://api.ai-yyds.com/v1'
+# os.environ["OPENAI_API_BASE"] = ''
 os.environ["OPENAI_API_KEY"] = ""
 sth = StreamHandler()
 llm = ChatOpenAI(temperature=0,
